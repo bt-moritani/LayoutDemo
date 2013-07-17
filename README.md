@@ -1,4 +1,5 @@
 LayoutDemo
 ==========
 
-Auto Layout in Storyboard
+
+Auto Layoutを使った、スライドメニューのサンプルプロジェクトです。
