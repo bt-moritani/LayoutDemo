@@ -18,6 +18,28 @@
 @implementation ViewController
 
 
+- (void)showMenuWithPoint:(CGPoint)point
+               completion:(void (^)(BOOL finished))completion
+{
+    
+    
+    self.mainViewLeftConstraint.constant = point.x;
+    
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished){
+                         [self updateViewConstraints];
+                         completion(finished);
+                     }];
+
+}
+
+
 - (void)showMenuWithCompletion:(void (^)(BOOL finished))completion
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);

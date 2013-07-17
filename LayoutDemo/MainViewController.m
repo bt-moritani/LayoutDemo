@@ -11,6 +11,7 @@
 
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
+@property (strong) UIPanGestureRecognizer *panGesture;
 @end
 
 @implementation MainViewController
@@ -20,7 +21,21 @@
     [self.baseVC showMenuWithCompletion:^(BOOL finished){
         NSLog(@"%s", __PRETTY_FUNCTION__);
     }];
+}
 
+- (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer
+{
+    CGPoint point = [recognizer translationInView:self.view];
+    
+    NSLog(@"%@", NSStringFromCGPoint(point));
+
+
+    [self.baseVC showMenuWithPoint:point
+                        completion:^(BOOL finished){
+        
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        
+    }];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -28,7 +43,7 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        
+        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     }
     return self;
 }
@@ -37,6 +52,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self.view addGestureRecognizer:_panGesture];
 }
 
 - (void)didReceiveMemoryWarning

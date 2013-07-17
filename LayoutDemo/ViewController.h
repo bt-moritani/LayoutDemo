@@ -13,5 +13,7 @@
 
 - (void)showMenuWithCompletion:(void (^)(BOOL finished))completion;
 
+- (void)showMenuWithPoint:(CGPoint)point
+               completion:(void (^)(BOOL finished))completion;
 
 @end
